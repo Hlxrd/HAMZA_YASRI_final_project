@@ -39,6 +39,10 @@ Route::middleware('role:User')->group(function () {
 Route::get("/rental" , function (){
     return view("rentals.rentals");
 });
+
+Route::get("/contactUs", function (){
+    return view("contact.contact");
+});
 Route::get('/user/selectedRental/{rental}', [RentalController::class, 'show'])->name('rental.show');
 Route::middleware('role:Admin')->group(function () {
     Route::get('/admin', function () {
