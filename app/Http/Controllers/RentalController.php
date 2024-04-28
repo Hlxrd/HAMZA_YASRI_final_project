@@ -13,9 +13,8 @@ class RentalController extends Controller
      */
     public function index()
     {
-        //
-        return view("rentals.rentals");
-
+            //
+        ;
     }
 
     /**
@@ -43,7 +42,7 @@ class RentalController extends Controller
             "description" => "required",
             "imgs" => ["max:2048, required, mimes:png,jpg,jpeg", "required"],
             // "user_id" => "required"
-        
+
         ]);
         // dd($request);
 
@@ -56,22 +55,21 @@ class RentalController extends Controller
         //* multiple image
 
 
-        // dd($request);
 
         $auth = auth()->user();
         // dd($auth);
-        
+
 
         // $images = $request->file(`imgs`);
         // // dd($images);
-        
+
         //     $imageName = time() . "_" . $images->getClientOriginalName();
         //     $images->storeAs("public/img", $imageName);
-            // dump($imageName);
-            $image = $request->file("imgs");
-            $imageName = time() . "_" . $image->getClientOriginalName();
-            $image->storeAs("public/img", $imageName);
-        
+        // dump($imageName);
+        $image = $request->file("imgs");
+        $imageName = time() . "_" . $image->getClientOriginalName();
+        $image->storeAs("public/img", $imageName);
+
         Rental::create([
             "title" => $request->title,
             "property_type" => $request->property_type,
@@ -83,6 +81,7 @@ class RentalController extends Controller
         ]);
 
         return redirect()->back();
+        dd($request);
     }
 
     /**
@@ -91,9 +90,8 @@ class RentalController extends Controller
     public function show(Rental $rental)
     {
         //
-
-        return view('rentals.rentals', compact('rental'));
-
+        $rentals = Rental::all();
+        return view('rentals.rentals', compact('rentals'));
     }
 
     /**
