@@ -34,23 +34,29 @@ Route::middleware('role:User')->group(function () {
     Route::get('/user', function () {
         return view('user.user');
     })->name('User');
-    
 });
-Route::get("/rental" , function (){
+Route::get("/rental", function () {
     return view("rentals.rentals");
 });
 
-Route::get("/contactUs", function (){
+Route::get("/contactUs", function () {
     return view("contact.contact");
 });
-Route::get('/user/selectedRental/{rental}', [RentalController::class, 'show'])->name('rental.show');
 Route::middleware('role:Admin')->group(function () {
     Route::get('/admin', function () {
         return view('admin.admin');
     })->name('Admin');
-    Route::post("/admin/postRentals" , [RentalController::class , "store"])->name("PostRentals.store");
-
+    Route::get("/editRental", function () {
+        return view('editRental');
+    });
+    Route::post("/admin/postRentals", [RentalController::class, "store"])->name("PostRentals.store");
+    Route::delete("/admin/deleteRental/{rental}", [RentalController::class, "destroy"])->name("PostRentals.destroy");
+    Route::get('/user/selectedRental/{rental}', [RentalController::class, 'show'])->name('rental.show');
+    Route::post("/showRental/{rental}", [RentalController::class, "show"])->name("PostRentals.show");
+    Route::put("/updateRental/{rental}", [RentalController::class, "update"])->name("PostRentals.update");
 });
+
+
 
 Route::get('/2fa', [DoubleAuthController::class, 'index'])->name('doubleAuth.index');
 Route::post('/2fa/switchAuthOption', [DoubleAuthController::class, 'switchAuthOption'])->name('doubleAuth.switchAuthOption');
@@ -58,7 +64,7 @@ Route::post('/2fa/verityCode', [DoubleAuthController::class, 'verityCode'])->nam
 Route::get('/2fa/resendCode', [DoubleAuthController::class, 'resendCode'])->name('doubleAuth.resendCode');
 
 
-Route::get('/search', [UserSearchController::class , "search"])->name('rentals.search');
+Route::get('/search', [UserSearchController::class, "search"])->name('rentals.search');
 
 
 

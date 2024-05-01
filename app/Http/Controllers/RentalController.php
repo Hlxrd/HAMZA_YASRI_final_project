@@ -14,26 +14,18 @@ class RentalController extends Controller
     public function index()
     {
             //
-        ;
+        
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+   
     public function store(Request $request)
     {
-        //
-        // dd($request);
-        // dd($request);
-        // dd($request);
         request()->validate([
             "title" => "required",
             "property_type" => "required",
@@ -41,31 +33,14 @@ class RentalController extends Controller
             "condition" => "required",
             "description" => "required",
             "imgs" => ["max:2048, required, mimes:png,jpg,jpeg", "required"],
-            // "user_id" => "required"
-
         ]);
-        // dd($request);
-
-        // $image = $request->file();
-        // dd($image); 
-        // $imageName = time() . "_" . $image->getClientOriginalName();
-        // $image->storeAs("public/imgs", $imageName);
-
-        // $userId = auth()->user()->id ;
-        //* multiple image
+        
 
 
 
         $auth = auth()->user();
-        // dd($auth);
+// dd($auth->id);
 
-
-        // $images = $request->file(`imgs`);
-        // // dd($images);
-
-        //     $imageName = time() . "_" . $images->getClientOriginalName();
-        //     $images->storeAs("public/img", $imageName);
-        // dump($imageName);
         $image = $request->file("imgs");
         $imageName = time() . "_" . $image->getClientOriginalName();
         $image->storeAs("public/img", $imageName);
@@ -79,9 +54,10 @@ class RentalController extends Controller
             "imgs" => $imageName,
             "user_id" => $auth->id,
         ]);
+        
+    return back()->with('success', 'you have posted your rental successfully');
 
-        return redirect()->back();
-        dd($request);
+        
     }
 
     /**
@@ -90,8 +66,9 @@ class RentalController extends Controller
     public function show(Rental $rental)
     {
         //
-        $rentals = Rental::all();
-        return view('rentals.rentals', compact('rentals'));
+        // $rental = Rental::all();
+        return view('rentals.rentals', compact('rental'));
+        
     }
 
     /**
@@ -100,6 +77,7 @@ class RentalController extends Controller
     public function edit(Rental $rental)
     {
         //
+        
     }
 
     /**
@@ -108,6 +86,36 @@ class RentalController extends Controller
     public function update(Request $request, Rental $rental)
     {
         //
+        request()->validate([
+            "title" => "required",
+            "property_type" => "required",
+            "price" => "required",
+            "condition" => "required",
+            "description" => "required",
+            "imgs" => ["max:2048, required, mimes:png,jpg,jpeg", "required"],
+            
+        ]);
+        // dd($request);
+        
+
+
+
+        $auth = auth()->user();
+        
+        $image = $request->file("imgs");
+        $imageName = time() . "_" . $image->getClientOriginalName();
+        $image->storeAs("public/img", $imageName);
+
+        $rental->update([
+            "title" => $request->title,
+            "property_type" => $request->property_type,
+            "price" => $request->price,
+            "condition" => $request->condition,
+            "description" => $request->description,
+            "imgs" => $imageName,
+            "user_id" => $auth->id,
+        ]);
+        return redirect()->back();
     }
 
     /**
@@ -116,6 +124,9 @@ class RentalController extends Controller
     public function destroy(Rental $rental)
     {
         //
+        // dd($rental);
+        $rental->delete();
+        return redirect()->back();
     }
 
     public function userRent()

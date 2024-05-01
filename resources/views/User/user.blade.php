@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    @vite(['resources/js/app.js'])
-    @vite('resources/css/app.css')
-    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
-    <title>Document</title>
-</head>
+<x-app-layout>
 
 <body class="bg-slate-600 ">
 
@@ -48,9 +37,13 @@
                                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                     {{ $rental->title }}</h5>
                             </a>
+                            {{-- @if ($user->id == $rentals->user_id)
+                                <h1>hello authentificated</h1>
+                            @endif --}}
                             <p class="mb-3 font-normal text-gray-700 dark:text-slate-900">{{ $rental->description }}</p>
                             <div class="flex gap-4  h-fit">
                                 @if (Auth::user()->role == 'Admin')
+
                                     <a href="{{ route('Admin') }}"
                                         class="rounded-md px-3 py-2 my-4 w-[15%] text-center bg-slate-800 text-blue-200 hover:text-blue-50 hover:scale-105  outline ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
                                         Edit
@@ -87,4 +80,4 @@
     @endrole
 </body>
 
-</html>
+</x-app-layout>

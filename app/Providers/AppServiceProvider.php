@@ -35,10 +35,13 @@ class AppServiceProvider extends ServiceProvider
             });
     
             FacadesGate::define('product', function (User $user) {
-                return in_array($user->role, ['Admin', 'Moderator']);
+                return in_array($user->role, ['Admin', 'User']);
                 // return $user->role == 'admin' || $user->role == 'seller';
             });
-        $rentals = Rental::all();
+        $rentals = Rental::paginate(3);
+        // $user = auth()->user();
+        // dump($user);
+        // dump($rentals->user_id);
         view()->share(['rentals'=> $rentals ]);
         // $images = $rentals->imgs;
         // view()->share(['images'=> $images ]);

@@ -6,6 +6,8 @@ abstract class Controller
 {
     //
     // 
+    // Mail::to($user->email)->send(new ContactMailer($paramOnlyIfNeeded));
+
 
     
 }
