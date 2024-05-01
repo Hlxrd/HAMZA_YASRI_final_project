@@ -54,8 +54,9 @@
                             </div>
                             <div class="flex h-full bottom-0">
                                 @if (Auth::user()->role == 'Admin' && Auth::user()->id == $rental->user_id)
-                                <a href="/editRental">
-                                    <button
+                                <a href="{{ route('editRental', $rental->id) }}"
+                                    id="{{ $rental->id }}">
+                                    <button 
                                             class="rounded-md px-3 py-2 my-4  text-center bg-slate-800 text-blue-200 hover:text-blue-50 hover:scale-105  outline ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
                                             Edit
                                         </button>
@@ -69,7 +70,7 @@
                                             class="outline  px-3 py-1.5 my-4 mx-3 hover:scale-105 transition-all      rounded outline-blue-400 bg-slate-800 text-blue-200  hover:bg-slate-600 hover:outline-red-700 hover:text-red-700">Delete</button>
                                     </form>
                                 @elseif (Auth::user()->role == 'User' )
-                                    <a href="/rental" id="{{ $rental->id }}"
+                                    <a href="{{ route("PostRentals.show") }}"
                                         class="inline-flex  cursor-pointer h-[20%] items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                         Read more
                                         <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"

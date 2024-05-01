@@ -3,8 +3,10 @@
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\DoubleAuthController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RentalController;
+use App\Http\Controllers\StripeController;
 use App\Http\Controllers\UserSearchController;
 use App\Http\Middleware\RoleMiddleware;
 use Illuminate\Support\Facades\Route;
@@ -48,7 +50,7 @@ Route::middleware('role:Admin')->group(function () {
     })->name('Admin');
     Route::get("/editRental", function () {
         return view('editRental');
-    });
+    })->name("editRental");
     Route::post("/admin/postRentals", [RentalController::class, "store"])->name("PostRentals.store");
     Route::delete("/admin/deleteRental/{rental}", [RentalController::class, "destroy"])->name("PostRentals.destroy");
     Route::get('/user/selectedRental/{rental}', [RentalController::class, 'show'])->name('rental.show');
@@ -57,7 +59,7 @@ Route::middleware('role:Admin')->group(function () {
 });
 
 
-
+Route::get("/session" , [StripeController::class , "session"]);
 Route::get('/2fa', [DoubleAuthController::class, 'index'])->name('doubleAuth.index');
 Route::post('/2fa/switchAuthOption', [DoubleAuthController::class, 'switchAuthOption'])->name('doubleAuth.switchAuthOption');
 Route::post('/2fa/verityCode', [DoubleAuthController::class, 'verityCode'])->name('doubleAuth.verityCode');

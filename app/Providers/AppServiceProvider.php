@@ -36,15 +36,16 @@ class AppServiceProvider extends ServiceProvider
     
             FacadesGate::define('product', function (User $user) {
                 return in_array($user->role, ['Admin', 'User']);
-                // return $user->role == 'admin' || $user->role == 'seller';
+                
             });
-        $rentals = Rental::paginate(3);
-        // $user = auth()->user();
-        // dump($user);
-        // dump($rentals->user_id);
+
+
+            // Cashier::useCustomerModel(User::class);
+
+        $rentals = Rental::latest()->paginate(3);
+        
         view()->share(['rentals'=> $rentals ]);
-        // $images = $rentals->imgs;
-        // view()->share(['images'=> $images ]);
+        
 
         
     }

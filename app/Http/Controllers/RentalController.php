@@ -14,6 +14,7 @@ class RentalController extends Controller
     public function index()
     {
             //
+            
         
     }
 
@@ -63,10 +64,12 @@ class RentalController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Rental $rental)
+    public function show(Rental $rental , $id)
     {
         //
         // $rental = Rental::all();
+
+        // $rental = Rental::find($id);
         return view('rentals.rentals', compact('rental'));
         
     }
@@ -95,7 +98,7 @@ class RentalController extends Controller
             "imgs" => ["max:2048, required, mimes:png,jpg,jpeg", "required"],
             
         ]);
-        // dd($request);
+        
         
 
 
@@ -124,7 +127,7 @@ class RentalController extends Controller
     public function destroy(Rental $rental)
     {
         //
-        // dd($rental);
+        
         $rental->delete();
         return redirect()->back();
     }

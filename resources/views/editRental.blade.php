@@ -3,14 +3,14 @@
     <div class="flex items-center justify-center w-[50vw]">
         <!-- Author: FormBold Team -->
         <!-- Learn More: https://formbold.com -->
-{{-- @foreach ($rentals as $rental) --}}
+
     
-        <div class="modalForm mx-auto w-full  max-w-[550px] ">
-            <form action="{{ route('PostRentals.update', $rental) }}"
+        <div class="modalForm mx-auto w-full  max-w-[550px] " >
+            <form action="{{ route('PostRentals.update', $rental) }}" 
                 class="w-full" method="post">
                 @csrf
                 @method('PUT')
-                <div class="flex flex-row">
+                <div class="flex flex-row"  >
                     <div>
                         <div class="mb-5">
                             <label for="title"
@@ -98,7 +98,7 @@
             </form>
 
         </div>
-{{-- @endforeach --}}
+
 
     </div>
 </x-app-layout>
