@@ -119,7 +119,7 @@ class RentalController extends Controller
             "user_id" => $auth->id,
         ]);
         // dd($request);
-        return redirect()->back()->with('success','you have updated your rent , chack dashboard for more');
+        return back()->with('success','you have updated your rent , chack dashboard for more');
     }
 
     /**
@@ -130,7 +130,7 @@ class RentalController extends Controller
         //
         
         $rental->delete();
-        return redirect()->back();
+        return redirect()->view('dashboard');
     }
 
     public function userRent()

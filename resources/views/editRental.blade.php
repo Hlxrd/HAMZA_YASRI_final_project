@@ -99,6 +99,10 @@
                     Submit
                 </button>
             </form>
+            <a href="/dashboard">
+                <button
+                    class="outline  px-3 py-1.5 my-4 mx-3 hover:scale-105 transition-all      rounded outline-blue-400 bg-slate-800 text-blue-200  hover:bg-slate-600 hover:outline-red-700 hover:text-red-700">Delete</button>
+            </a>
         </div>
         @endforeach
         
