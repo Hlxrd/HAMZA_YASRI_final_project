@@ -53,8 +53,8 @@ Route::middleware('role:Admin')->group(function () {
     })->name("editRental");
     Route::post("/admin/postRentals", [RentalController::class, "store"])->name("PostRentals.store");
     Route::delete("/admin/deleteRental/{rental}", [RentalController::class, "destroy"])->name("PostRentals.destroy");
-    Route::get('/user/selectedRental/{rental}', [RentalController::class, 'show'])->name('rental.show');
-    Route::post("/showRental/{rental}", [RentalController::class, "show"])->name("PostRentals.show");
+    // Route::get('/user/selectedRental/{rental}', [RentalController::class, 'show'])->name('rental.show');
+    Route::get("/showRental/{rental}", [RentalController::class, "show"])->name("PostRentals.show");
     Route::put("/updateRental/{rental}", [RentalController::class, "update"])->name("PostRentals.update");
 });
 

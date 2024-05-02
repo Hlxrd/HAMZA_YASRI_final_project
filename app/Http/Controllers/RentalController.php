@@ -40,9 +40,10 @@ class RentalController extends Controller
 
 
         $auth = auth()->user();
-// dd($auth->id);
+// dd($request);
 
         $image = $request->file("imgs");
+        // dump($image);
         $imageName = time() . "_" . $image->getClientOriginalName();
         $image->storeAs("public/img", $imageName);
 
@@ -64,13 +65,13 @@ class RentalController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Rental $rental , $id)
+    public function show(Rental $rental)
     {
         //
         // $rental = Rental::all();
 
         // $rental = Rental::find($id);
-        return view('rentals.rentals', compact('rental'));
+        return view('editRental');
         
     }
 
@@ -100,25 +101,25 @@ class RentalController extends Controller
         ]);
         
         
-
-
-
+        
+        
         $auth = auth()->user();
         
-        $image = $request->file("imgs");
-        $imageName = time() . "_" . $image->getClientOriginalName();
-        $image->storeAs("public/img", $imageName);
-
+        // $image = $request->file("imgs");
+        // $imageName = time() . "_" . $image->getClientOriginalName();
+        // $image->storeAs("public/img", $imageName);
+        
         $rental->update([
             "title" => $request->title,
             "property_type" => $request->property_type,
             "price" => $request->price,
             "condition" => $request->condition,
             "description" => $request->description,
-            "imgs" => $imageName,
+            "imgs" => $request->imgs,
             "user_id" => $auth->id,
         ]);
-        return redirect()->back();
+        // dd($request);
+        return redirect()->back()->with('success','you have updated your rent , chack dashboard for more');
     }
 
     /**

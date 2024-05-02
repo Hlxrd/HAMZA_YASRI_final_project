@@ -1,18 +1,21 @@
 <x-app-layout>
     
-    <div class="flex items-center justify-center w-[50vw]">
+    <div class="lg:flex items-center  justify-center p-10 gap-3">
+        <div class="w-[40%] h-[100%] rounded-lg">
+            <img src="{{ asset('imgs/edit.jpg') }}" class="rounded-lg" alt="">
+        </div>
         <!-- Author: FormBold Team -->
         <!-- Learn More: https://formbold.com -->
-
+@foreach ($rentals as $rental)
     
         <div class="modalForm mx-auto w-full  max-w-[550px] " >
             <form action="{{ route('PostRentals.update', $rental) }}" 
                 class="w-full" method="post">
                 @csrf
                 @method('PUT')
-                <div class="flex flex-row"  >
-                    <div>
-                        <div class="mb-5">
+                <div class="flex flex-row gap-2"  >
+                    
+                        <div class="mb-5 lg:flex flex-col">
                             <label for="title"
                                 class="mb-3 block text-base font-medium text-[#07074D]">
                                 Current Rental Title
@@ -64,17 +67,17 @@
                                 class="mb-3 block text-base font-medium text-[#07074D]">
                                 condition
                             </label>
-                            <input required type="number" name="condition"
+                            <input required type="text" name="condition"
                                 id="condition" placeholder=""
                                 value="{{ old('property_type', $rental->condition) }}"
                                 class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
                         </div>
                         <div class="mb-5">
-                            <label for="price"
+                            <label for="imgs"
                                 class="mb-3 block text-base font-medium text-[#07074D]">
                                 New Image
                             </label>
-                            <input required type="file"
+                            <input required type="file" name="imgs"
                                 class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
                         </div>
                         <div class="mb-5">
@@ -87,18 +90,18 @@
                                 class="w-full resize-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"></textarea>
                         </div>
                     </div>
-                </div>
-                <div>
-                </div>
+                
+                
+                
                 <button
                 
                     class="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-base font-semibold text-white outline-none">
                     Submit
                 </button>
             </form>
-
         </div>
-
-
+        @endforeach
+        
     </div>
+    <a href="/dashboard" class="ml-20 px-4 py-3 text-xl shadow-blue-400 hover:text-blue-100 shadow-lg rounded-full hover:rounded-xl transition-all duration-100 hover:bg-blue-400 bg-blue-200 ">Back to Dashboard    </a>           
 </x-app-layout>

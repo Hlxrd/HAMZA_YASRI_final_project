@@ -22,7 +22,7 @@
             class="max-w-7xl  mx-auto sm:px-6 w-[90%] flex flex-wrap gap-4 lg:px-8 h-fit p-3 rounded-xl bg-slate-300 pt-3 ">
             {{-- Genious Huh :D --}}
             @if ($rentals->count() == 0)
-                <h1 class="text">No rentals to show for the moment </h1>
+                <h1 class="text">No rentals to show for the moment</h1>
             @endif
             {{--  --}}
             <div class="text-center pb-12 w-full flex flex-col justify-center items-center">
@@ -52,16 +52,16 @@
                                 <br>
                                 <p class="text-xl text-gray-700 font-bold mb-2">{{ $rental->price }}$</p>
                             </div>
-                            <div class="flex h-full bottom-0">
+                            <div class="flex h-fit bottom-0">
                                 @if (Auth::user()->role == 'Admin' && Auth::user()->id == $rental->user_id)
-                                <a href="{{ route('editRental', $rental->id) }}"
-                                    id="{{ $rental->id }}">
-                                    <button 
-                                            class="rounded-md px-3 py-2 my-4  text-center bg-slate-800 text-blue-200 hover:text-blue-50 hover:scale-105  outline ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-                                            Edit
-                                        </button>
+                                    <form action="{{ route("PostRentals.show" , $rental) }}" method="get">
+                                        @csrf
+                                        <button 
+                                                class="rounded-md px-3 py-2 my-4  text-center bg-slate-800 text-blue-200 hover:text-blue-50 hover:scale-105  outline ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                                                Edit
+                                            </button>
 
-                                </a>
+                                        </from>
                                     <!-- component -->
                                     <form action="{{ route('PostRentals.destroy', $rental) }}" method="post">
                                         @csrf
@@ -70,7 +70,7 @@
                                             class="outline  px-3 py-1.5 my-4 mx-3 hover:scale-105 transition-all      rounded outline-blue-400 bg-slate-800 text-blue-200  hover:bg-slate-600 hover:outline-red-700 hover:text-red-700">Delete</button>
                                     </form>
                                 @elseif (Auth::user()->role == 'User' )
-                                    <a href="{{ route("PostRentals.show") }}"
+                                    <a href="{{ route("PostRentals.show" , $rental) }}"
                                         class="inline-flex  cursor-pointer h-[20%] items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                         Read more
                                         <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"
@@ -90,7 +90,7 @@
                                                 stroke-linejoin="round" stroke-width="2"
                                                 d="M1 5h12m0 0L9 1m4 4L9 9" />
                                         </svg>
-                                    </a>
+                                    </>
                                 @endif
                             </div>
 
